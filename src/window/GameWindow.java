@@ -29,7 +29,7 @@ public class GameWindow extends JFrame{
      */
     private void initUI() {
 
-        setTitle("Vector TD");
+        setTitle("Powder Physics");
 
         Game.getInstance().init();
 

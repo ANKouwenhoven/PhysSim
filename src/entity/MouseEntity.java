@@ -1,24 +1,49 @@
 package entity;
 
-import entity.particle.OrbitalParticle;
-import singleton.ParticleManager;
 import window.GameWindow;
 
+import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Arnoud on 8-11-2016.
  */
-public class MouseEntity extends Entity implements MovingEntity {
+public class MouseEntity extends JPanel {
 
-    private OrbitalParticle particle;
+    private Point location;
 
-    public MouseEntity(int x, int y) {
-        super(x, y);
-        particle = new OrbitalParticle(this, 5, 10, 0, 5, new ArrayList<>(Arrays.asList(Color.BLACK)));
-        ParticleManager.addOrbitParticle(particle);
+    public MouseEntity(int x, int y){
+        location = new Point(x, y);
+    }
+
+    /**
+     * @return - x position of this Entity
+     */
+    public int getX(){
+        return location.x;
+    }
+
+    /**
+     * @return - y position of this Entity
+     */
+    public int getY(){
+        return location.y;
+    }
+
+    /**
+     * Sets a new X position for this Entity.
+     * @param newX - new X position
+     */
+    public void setX(double newX){
+        location.x = (int)Math.round(newX);
+    }
+
+    /**
+     * Sets a new Y position for this Entity.
+     * @param newY - new Y position
+     */
+    public void setY(double newY){
+        location.y = (int)Math.round(newY);
     }
 
     /**

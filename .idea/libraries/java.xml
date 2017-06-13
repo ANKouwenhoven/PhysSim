@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="java">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://D:/Files/jbox2d-master/jbox2d-library/src/main/java" />
+      <root url="file://D:/Files/jbox2d-master/jbox2d-library/src/test/java" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,12 +1,9 @@
 package keyAdapter;
 
-import entity.projectile.ProjSpeeder;
+import drawing.PhysicsEngine;
+import entity.*;
 import singleton.Game;
-import singleton.GameGrid;
-import singleton.ParticleManager;
-import window.GameWindow;
 
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -15,7 +12,7 @@ import java.awt.event.MouseEvent;
  */
 public class PlayerMouseAdapter extends MouseAdapter {
 
-    private int mouseX, mouseY, mouseGridX, mouseGridY = 0;
+    private int mouseX, mouseY = 0;
 
     /**
      * Runs when a mouse button is pressed.
@@ -23,22 +20,22 @@ public class PlayerMouseAdapter extends MouseAdapter {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        mouseX = Math.round((Game.getInstance().getLevel().getMouse().getX()));
-        mouseY = Math.round((Game.getInstance().getLevel().getMouse().getY()));
-        mouseGridX = (mouseX - 8) / 16;
-        mouseGridY = (mouseY - 8) / 16;
-        int convertGridX = mouseGridX * 16 + 8;
-        int convertGridY = mouseGridY * 16 + 8;
-
-        ParticleManager.particleBurst(convertGridX, convertGridY, .2, .2, 20, 200, Color.black);
+        mouseX = Math.round((Game.getInstance().getMouse().getX()));
+        mouseY = Math.round((Game.getInstance().getMouse().getY()));
 
         switch(e.getButton()) {
             case MouseEvent.BUTTON1:
-                Game.getInstance().addProjectile(new ProjSpeeder(Game.getInstance().getLevel().getPlayer().getX(), Game.getInstance().getLevel().getPlayer().getY(),
-                        mouseX, mouseY, 1200, Integer.MAX_VALUE).setSpeed(5));
+                for (int i = -10; i < 10; i++) {
+                    PhysicsEngine.getGameGrid()[mouseX + (int)(Math.random() * i)]
+                            [mouseY + (int)(Math.random() * i)] = new EntitySand();
+                    PhysicsEngine.getGameGrid()[mouseX + (int)(Math.random() * i)]
+                            [mouseY + (int)(Math.random() * i)] = new EntityGravel();
+                    PhysicsEngine.getGameGrid()[mouseX + (int)(Math.random() * i)]
+                            [mouseY + (int)(Math.random() * i)] = new EntitySnow();
+
+                }
                 break;
             case MouseEvent.BUTTON3:
-                GameGrid.getInstance().setEntity(mouseGridX, mouseGridY, "LaserTurret");
                 break;
         }
     }
